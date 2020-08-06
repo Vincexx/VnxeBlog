@@ -31,3 +31,30 @@ An open-source Vnxe Blog web application using Laravel and Vue.
 <p align="center"><img src="https://github.com/Vincexx/VnxeBlog/blob/master/public/img/Posts.PNG" width="100%"></p>
 
 <p align="center"><img src="https://github.com/Vincexx/VnxeBlog/blob/master/public/img/account.PNG" width="100%"></p>
+
+### Installation
+
+### Dependencies
+
+- Node.js (comes with a bundles npm)
+- Yarn (if you prefer not to use npm)
+- Composer
+- Git
+- Docker (Optional)
+- PHP 7.2.5 and up
+
+## Build Setup
+
+Create .env file from .env.example and update the variables to your configurations
+
+```bash
+# install dependencies
+$ composer install
+$ npm install
+
+# generate application key
+$ php artisan key:generate
+
+# serve at localhost:8000
+$ php artisan serve
+```
