@@ -21,3 +21,13 @@ An open-source Vnxe Blog web application using Laravel and Vue.
 ### Preview
 
 <p align="center"><img src="https://github.com/Vincexx/VnxeBlog/blob/master/public/img/Dashboard.PNG" width="100%"></p>
+
+<p align="center"><img src="https://github.com/Vincexx/VnxeBlog/blob/master/public/img/profile.PNG" width="100%"></p>
+
+<p align="center"><img src="https://github.com/Vincexx/VnxeBlog/blob/master/public/img/Users.PNG" width="100%"></p>
+
+<p align="center"><img src="https://github.com/Vincexx/VnxeBlog/blob/master/public/img/Categories.PNG" width="100%"></p>
+
+<p align="center"><img src="https://github.com/Vincexx/VnxeBlog/blob/master/public/img/Posts.PNG" width="100%"></p>
+
+<p align="center"><img src="https://github.com/Vincexx/VnxeBlog/blob/master/public/img/account.PNG" width="100%"></p>
