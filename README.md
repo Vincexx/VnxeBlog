@@ -20,4 +20,4 @@ An open-source Vnxe Blog web application using Laravel and Vue.
 
 ### Preview
 
-<p align="center"><img src="https://github.com/Vincexx/VnxeBlog/blob/master/public/img/Dashboard.PNG" width="600"></p>
+<p align="center"><img src="https://github.com/Vincexx/VnxeBlog/blob/master/public/img/Dashboard.PNG" width="100%"></p>
