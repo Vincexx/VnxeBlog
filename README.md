@@ -12,7 +12,7 @@ An open-source Vnxe Blog web application using Laravel and Vue.
 
 - Login
 - Register
-- CRUD of Categories with Image Upload
+- CRUD of Categories
 - CRUD of Posts with Image Upload
 - Display all Users
 - Update User's Profile
