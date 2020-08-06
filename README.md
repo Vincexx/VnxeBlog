@@ -58,3 +58,8 @@ $ php artisan key:generate
 # serve at localhost:8000
 $ php artisan serve
 ```
+
+### License
+
+This project is released under the [MIT](https://opensource.org/licenses/MIT) license.
+
