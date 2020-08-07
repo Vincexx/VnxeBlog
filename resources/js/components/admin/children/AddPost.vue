@@ -36,8 +36,13 @@
             v-model="post.description"   
             ></v-textarea>
 
-            <div v-if="post.image" class="mb-2">
+            <div v-if="post.image && !previewImage" class="mb-2">
               <v-img :src="'/storage/' + post.image" alt="image" v-if="edit">
+              </v-img>
+            </div>
+
+            <div v-if="previewImage" class="mb-2">
+              <v-img :src="previewImage" alt="image" width="100%" height="250px">
               </v-img>
             </div>
 
@@ -45,11 +50,11 @@
               label="Upload Image"
               filled
               prepend-icon="mdi-camera"
-            
+              clearable
               name="image"
               id="image"
               show-size
-              v-model="file"
+              @change="fileChange"
             ></v-file-input>
 
 
@@ -87,6 +92,7 @@
     props : ["showAddDialog", "authUser", "edit", "showPost"],
     data () {
         return {
+            previewImage : '',
             file : null,
             categories : [],
             config : { 
@@ -155,23 +161,31 @@
                 this.addingPost.description = ''
                 this.addingPost.image = ''
                 this.file = null
+                this.previewImage = ''
 
                 this.$parent.$emit('post_added')
             }).catch(err => console.log(err))
         },
         updatePost() {
-          let post = {
-            user_id : this.post.user_id,
-            category_id : this.post.category_id,
-            title : this.post.title,
-            description : this.post.description,
-            image : this.post.image
-          }
+          const form = new FormData()
+
+          form.append('user_id', this.authUser.id);
+          form.append('category_id', this.post.category_id);
+          form.append('title', this.post.title);
+          form.append('description', this.post.description);
+          form.append('image', this.file);
+          form.append('_method', 'PUT');
         
-          axios.put('/api/posts/' + this.showPost.id, post, this.config)
+          axios.post('/api/posts/' + this.showPost.id, form, this.config)
           .then(res => {
-            console.log(res.data)
+            this.previewImage = ''
+            this.$parent.$emit('post_updated')
           }).catch(err => console.log(err))
+
+        },
+        fileChange(e) {
+          this.file = e
+          this.previewImage = URL.createObjectURL(e)
 
         }
       

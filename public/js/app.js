@@ -2611,6 +2611,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["user_profile", "config", "authUser"],
@@ -2657,7 +2663,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -2961,10 +2966,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["showAddDialog", "authUser", "edit", "showPost"],
   data: function data() {
     return {
+      previewImage: '',
       file: null,
       categories: [],
       config: {
@@ -3033,6 +3044,7 @@ __webpack_require__.r(__webpack_exports__);
         _this2.addingPost.description = '';
         _this2.addingPost.image = '';
         _this2.file = null;
+        _this2.previewImage = '';
 
         _this2.$parent.$emit('post_added');
       })["catch"](function (err) {
@@ -3040,18 +3052,26 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     updatePost: function updatePost() {
-      var post = {
-        user_id: this.post.user_id,
-        category_id: this.post.category_id,
-        title: this.post.title,
-        description: this.post.description,
-        image: this.post.image
-      };
-      axios.put('/api/posts/' + this.showPost.id, post, this.config).then(function (res) {
-        console.log(res.data);
+      var _this3 = this;
+
+      var form = new FormData();
+      form.append('user_id', this.authUser.id);
+      form.append('category_id', this.post.category_id);
+      form.append('title', this.post.title);
+      form.append('description', this.post.description);
+      form.append('image', this.file);
+      form.append('_method', 'PUT');
+      axios.post('/api/posts/' + this.showPost.id, form, this.config).then(function (res) {
+        _this3.previewImage = '';
+
+        _this3.$parent.$emit('post_updated');
       })["catch"](function (err) {
         return console.log(err);
       });
+    },
+    fileChange: function fileChange(e) {
+      this.file = e;
+      this.previewImage = URL.createObjectURL(e);
     }
   }
 });
@@ -3337,11 +3357,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["dialog", "user_profile", "config", "authUser"],
   data: function data() {
     return {
-      previewImage: ''
+      url: ''
     };
   },
   computed: {
@@ -3377,6 +3399,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     fileChange: function fileChange(e) {
       this.profile.image = e;
+      this.url = URL.createObjectURL(e);
     }
   }
 });
@@ -39052,13 +39075,7 @@ var render = function() {
                       }
                     },
                     [_vm._v("Save")]
-                  ),
-                  _vm._v(" "),
-                  _c("v-spacer"),
-                  _vm._v(" "),
-                  _c("v-btn", { attrs: { color: "primary" } }, [
-                    _vm._v("Change Password")
-                  ])
+                  )
                 ],
                 1
               )
@@ -39912,34 +39929,34 @@ var render = function() {
                 "v-card-text",
                 { staticClass: "text-center" },
                 [
-                  _c(
-                    "v-avatar",
-                    { staticClass: "mb-5", attrs: { size: "avatarSize" } },
-                    [
-                      _c("img", {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: !_vm.profile.image,
-                            expression: "!profile.image"
-                          }
-                        ],
-                        staticClass: "w-50",
-                        attrs: { src: "/img/blankProfile.jpg", alt: "alt" }
-                      }),
-                      _vm._v(" "),
-                      _vm.profile.image
-                        ? _c("img", {
+                  !_vm.profile.image
+                    ? _c(
+                        "v-avatar",
+                        { staticClass: "mb-5", attrs: { size: "avatarSize" } },
+                        [
+                          _c("img", {
+                            staticClass: "w-50",
+                            attrs: { src: "/img/blankProfile.jpg", alt: "alt" }
+                          })
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.profile.image
+                    ? _c(
+                        "v-avatar",
+                        { staticClass: "mb-5", attrs: { size: "avatarSize" } },
+                        [
+                          _c("img", {
                             staticClass: "w-50",
                             attrs: {
                               src: "/storage/" + _vm.profile.image,
                               alt: "alt"
                             }
                           })
-                        : _vm._e()
-                    ]
-                  ),
+                        ]
+                      )
+                    : _vm._e(),
                   _vm._v(" "),
                   _c("div", { staticClass: "display-1" }, [
                     _vm._v(
@@ -40403,7 +40420,7 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _vm.post.image
+                  _vm.post.image && !_vm.previewImage
                     ? _c(
                         "div",
                         { staticClass: "mb-2" },
@@ -40421,22 +40438,35 @@ var render = function() {
                       )
                     : _vm._e(),
                   _vm._v(" "),
+                  _vm.previewImage
+                    ? _c(
+                        "div",
+                        { staticClass: "mb-2" },
+                        [
+                          _c("v-img", {
+                            attrs: {
+                              src: _vm.previewImage,
+                              alt: "image",
+                              width: "100%",
+                              height: "250px"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
                   _c("v-file-input", {
                     attrs: {
                       label: "Upload Image",
                       filled: "",
                       "prepend-icon": "mdi-camera",
+                      clearable: "",
                       name: "image",
                       id: "image",
                       "show-size": ""
                     },
-                    model: {
-                      value: _vm.file,
-                      callback: function($$v) {
-                        _vm.file = $$v
-                      },
-                      expression: "file"
-                    }
+                    on: { change: _vm.fileChange }
                   })
                 ],
                 1
@@ -40744,13 +40774,20 @@ var render = function() {
                         attrs: { src: "/img/blankProfile.jpg", alt: "alt" }
                       }),
                       _vm._v(" "),
-                      _vm.profile.image
+                      _vm.profile.image && !_vm.url
                         ? _c("img", {
                             staticClass: "w-50",
                             attrs: {
                               src: "/storage/" + _vm.profile.image,
                               alt: "alt"
                             }
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.url
+                        ? _c("img", {
+                            staticClass: "w-50",
+                            attrs: { src: _vm.url, alt: "alt" }
                           })
                         : _vm._e()
                     ]

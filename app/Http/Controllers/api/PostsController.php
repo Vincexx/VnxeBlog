@@ -107,17 +107,21 @@ class PostsController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        if($request->hasFile('image')) {
+            Storage::delete($post->image);
+            $image = $request->image->store('posts_images');
+            $post->image = $image;
+            $post->save();
+        }
+
         $post->update([
             'category_id' => $request->category_id,
             'title' => $request->title,
             'slug' => Str::slug($request->title),
             'description' => $request->description,
-            'image' => $request->image
         ]);
        
-        return response()->json([
-            'posts' => $post,
-        ]);
+        return response()->json($post);
 
     }
 

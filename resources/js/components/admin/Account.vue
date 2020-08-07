@@ -29,8 +29,8 @@
 
                 <v-card-actions>
                     <v-btn color="success" @click="updateProfile()">Save</v-btn>
-                    <v-spacer></v-spacer>
-                    <v-btn color="primary">Change Password</v-btn>
+                    <!-- <v-spacer></v-spacer>
+                    <v-btn color="primary">Change Password</v-btn> -->
                 </v-card-actions>
             </v-card>
         </v-app>

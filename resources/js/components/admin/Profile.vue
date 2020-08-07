@@ -13,11 +13,17 @@
                     <v-avatar
                     size="avatarSize"
                     class="mb-5"
+                    v-if="!profile.image"
                     >
+                    <img src="/img/blankProfile.jpg" alt="alt" class="w-50">
+                    </v-avatar>
 
-                    <img src="/img/blankProfile.jpg" alt="alt" class="w-50" v-show="!profile.image">
-                    <img :src="'/storage/' + profile.image" alt="alt" class="w-50" v-if="profile.image">
-                    
+                    <v-avatar
+                    size="avatarSize"
+                    class="mb-5"
+                    v-if="profile.image"
+                    >
+                    <img :src="'/storage/' + profile.image" alt="alt" class="w-50">
                     </v-avatar>
 
                     <div class="display-1">
@@ -59,6 +65,7 @@ import EditProfile from './children/EditProfile'
                 location.reload()
                 this.dialog = false
                 this.message = message  
+                
             })
         },
         components : {

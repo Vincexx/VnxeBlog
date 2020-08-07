@@ -81,6 +81,7 @@ import AddPost from "./children/AddPost.vue"
       })
 
       this.$on('post_added', () => {
+          
           this.showAddDialog = false
           this.fetchPosts()
       })
