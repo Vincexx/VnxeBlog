@@ -22,8 +22,6 @@ An open-source Vnxe Blog web application using Laravel and Vue.
 
 <p align="center"><img src="https://github.com/Vincexx/VnxeBlog/blob/master/public/img/Dashboard.PNG" width="100%"></p>
 
-<hr>
-
 <p align="center"><img src="https://github.com/Vincexx/VnxeBlog/blob/master/public/img/profile.PNG" width="100%"></p>
 
 <p align="center"><img src="https://github.com/Vincexx/VnxeBlog/blob/master/public/img/Users.PNG" width="100%"></p>
@@ -57,9 +55,17 @@ $ npm install
 # generate application key
 $ php artisan key:generate
 
+# Migration and Seeder
+$ php artisan migrate
+$ php artisan db:seed
+
 # serve at localhost:8000
 $ php artisan serve
 ```
+## Login
+
+- Email : admin@gmail.com
+- Password : password
 
 ### License
 
