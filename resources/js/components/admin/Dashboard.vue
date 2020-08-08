@@ -8,7 +8,7 @@
                             <v-card-title>Users</v-card-title>
 
                             <v-card-text>
-                                12
+                                {{ users_count }}
                             </v-card-text>
                         </v-card>
                     </v-col>
@@ -17,28 +17,21 @@
                             <v-card-title>Categories</v-card-title>
 
                             <v-card-text>
-                                12
+                                {{ categories_count }}
                             </v-card-text>
                         </v-card>
                     </v-col>
+                    
                      <v-col cols="12" md="4">
                         <v-card color="purple lighten-4">
                             <v-card-title>Posts</v-card-title>
 
                             <v-card-text>
-                                12
+                                {{ posts_count }}
                             </v-card-text>
                         </v-card>
                     </v-col>
-                     <v-col cols="12" md="4">
-                        <v-card color="blue lighten-4">
-                            <v-card-title>Comments</v-card-title>
-
-                            <v-card-text>
-                                12
-                            </v-card-text>
-                        </v-card>
-                    </v-col>
+                   
                 </v-row>
             </v-container>
         </v-app>
@@ -47,7 +40,7 @@
 
 <script>
     export default {
-        props : ["authUser"],
+        props : ["authUser", "users_count", "categories_count", "posts_count"],
     }
 </script>
 

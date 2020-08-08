@@ -48,8 +48,6 @@ class PostsController extends Controller
     public function store(Request $request)
     {
 
-        $image = $request->image->store('posts_images');
-    
 
         $this->validate($request, [
             'user_id' => 'required',
@@ -57,9 +55,11 @@ class PostsController extends Controller
             'title' => 'required|unique:posts',
             'slug' => '',
             'description' => 'required',
-            'image' => '',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
         ]);
+
+        $image = $request->image->store('posts_images');
 
         $post = Post::create([
             'user_id' => $request->user_id,
@@ -131,6 +131,7 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function destroy(Post $post)
     {
         Storage::delete($post->image);
@@ -139,4 +140,6 @@ class PostsController extends Controller
 
         return response()->json($post);
     }
+
+    
 }

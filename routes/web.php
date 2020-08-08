@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,16 +16,33 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $recentPosts=Post::orderBy('updated_at','desc')->limit(3)->get();
+    return view('welcome')->with('recentPosts', $recentPosts);
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-// Route::middleware('auth')->get('/admin/dashboard', 'AdminController@index')->name('admin-dashboard');
+Route::middleware('auth')->get('/admin/dashboard', function() {
+    return view('admin.dashboard');
+})->name('admin-dashboard');
 
 Route::middleware('auth')->get('admin/{any}', function () {
     return view('admin.dashboard');
 })->where('any', '[\/\w\.-]*');
 
+Route::post('logout', function() {
+
+    return auth()->logout();
+
+});
+
+Route::resource('posts', 'PostsController');
+
+Route::get('user/posts', function () {
+
+    $user_posts = Auth::user()->posts;
+    return response()->json($user_posts);
+
+});

@@ -24,8 +24,7 @@
                     <v-img :src="'/storage/' + item.image" alt="image" width="100px" height="60px" class="m-2"></v-img>
                   </div>
               </template>
-              
-
+            
               <template v-slot:item.actions="{ item }">
                     <v-icon
                         small
@@ -132,6 +131,7 @@ import AddPost from "./children/AddPost.vue"
     created() {
         this.fetchPosts()
     },
+  
     methods: {
         fetchPosts() {
             if(this.authUser.role === 'admin') {
@@ -139,7 +139,9 @@ import AddPost from "./children/AddPost.vue"
                 .then(res => this.posts = res.data)
                 .catch(err => console.log(err))
             } else {
-              this.posts = this.user_posts
+                 axios.get('/user/posts')
+                .then(res => this.posts = res.data)
+                .catch(err => console.log(err))
             }
         },
         editPost(id) {

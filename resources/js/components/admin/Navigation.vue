@@ -7,10 +7,20 @@
     >
       <v-list dense>
 
+        <v-list-item link @click="homepage()">
+            <v-list-item-action>
+                <v-icon>mdi-arrow-left</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+                <v-list-item-title>
+                  <div class="subtitle-1">
+                    Homepage
+                  </div>
+                </v-list-item-title>
+            </v-list-item-content>
+        </v-list-item>
+
          <v-list-item link>
-            <!-- <v-list-item-action>
-                <v-icon>mdi-account</v-icon>
-            </v-list-item-action> -->
             <v-list-item-content>
                 <v-list-item-title class="text-center">
                   <v-avatar
@@ -103,7 +113,9 @@
       color="white"
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>VNXE</v-toolbar-title>
+      <v-toolbar-title>
+        VNXE BLOG
+      </v-toolbar-title>
 
         <v-spacer></v-spacer>
 
@@ -120,6 +132,9 @@
         :config="config"
         :user_posts="user_posts"
         :user_profile="user_profile"
+        :users_count="users_count"
+        :categories_count="categories_count"
+        :posts_count="posts_count"
         ></router-view>
     </v-main>
 
@@ -134,7 +149,7 @@
 
 <script>
   export default {
-    props: ["authuser", "user_posts", "user_profile"],
+    props: ["authuser", "user_posts", "user_profile", "users_count", "categories_count", "posts_count"],
     data () {
       return {
         drawer: null,
@@ -151,9 +166,12 @@
             axios.post('/logout')
             .then(res => {
                 console.log(res);
-                window.location.href = '/login'
+                window.location.href = '/'
             }).catch(err => console.log(err))
 
+        },
+        homepage() {
+          window.location.href = '/'
         }
     }
   }

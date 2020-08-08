@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Post;
 
 class PostsController extends Controller
 {
@@ -43,9 +44,10 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        //
+        $recentPosts = Post::orderBy('updated_at', 'desc')->limit(3)->get();
+        return view('post_details')->with('post', $post)->with('recentPosts', $recentPosts);
     }
 
     /**

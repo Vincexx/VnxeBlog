@@ -2190,15 +2190,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["authUser"]
+  props: ["authUser", "users_count", "categories_count", "posts_count"]
 });
 
 /***/ }),
@@ -2346,8 +2339,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["authuser", "user_posts", "user_profile"],
+  props: ["authuser", "user_posts", "user_profile", "users_count", "categories_count", "posts_count"],
   data: function data() {
     return {
       drawer: null,
@@ -2363,10 +2371,13 @@ __webpack_require__.r(__webpack_exports__);
     logout: function logout() {
       axios.post('/logout').then(function (res) {
         console.log(res);
-        window.location.href = '/login';
+        window.location.href = '/';
       })["catch"](function (err) {
         return console.log(err);
       });
+    },
+    homepage: function homepage() {
+      window.location.href = '/';
     }
   }
 });
@@ -2384,7 +2395,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _children_DeletePost_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./children/DeletePost.vue */ "./resources/js/components/admin/children/DeletePost.vue");
 /* harmony import */ var _children_AddPost_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./children/AddPost.vue */ "./resources/js/components/admin/children/AddPost.vue");
-//
 //
 //
 //
@@ -2536,7 +2546,11 @@ __webpack_require__.r(__webpack_exports__);
           return console.log(err);
         });
       } else {
-        this.posts = this.user_posts;
+        axios.get('/user/posts').then(function (res) {
+          return _this2.posts = res.data;
+        })["catch"](function (err) {
+          return console.log(err);
+        });
       }
     },
     editPost: function editPost(id) {
@@ -39298,7 +39312,9 @@ var render = function() {
                           _vm._v(" "),
                           _c("v-card-text", [
                             _vm._v(
-                              "\n                            12\n                        "
+                              "\n                            " +
+                                _vm._s(_vm.users_count) +
+                                "\n                        "
                             )
                           ])
                         ],
@@ -39320,7 +39336,9 @@ var render = function() {
                           _vm._v(" "),
                           _c("v-card-text", [
                             _vm._v(
-                              "\n                            12\n                        "
+                              "\n                            " +
+                                _vm._s(_vm.categories_count) +
+                                "\n                        "
                             )
                           ])
                         ],
@@ -39342,29 +39360,9 @@ var render = function() {
                           _vm._v(" "),
                           _c("v-card-text", [
                             _vm._v(
-                              "\n                            12\n                        "
-                            )
-                          ])
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-col",
-                    { attrs: { cols: "12", md: "4" } },
-                    [
-                      _c(
-                        "v-card",
-                        { attrs: { color: "blue lighten-4" } },
-                        [
-                          _c("v-card-title", [_vm._v("Comments")]),
-                          _vm._v(" "),
-                          _c("v-card-text", [
-                            _vm._v(
-                              "\n                            12\n                        "
+                              "\n                            " +
+                                _vm._s(_vm.posts_count) +
+                                "\n                        "
                             )
                           ])
                         ],
@@ -39429,6 +39427,40 @@ var render = function() {
             "v-list",
             { attrs: { dense: "" } },
             [
+              _c(
+                "v-list-item",
+                {
+                  attrs: { link: "" },
+                  on: {
+                    click: function($event) {
+                      return _vm.homepage()
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "v-list-item-action",
+                    [_c("v-icon", [_vm._v("mdi-arrow-left")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-list-item-content",
+                    [
+                      _c("v-list-item-title", [
+                        _c("div", { staticClass: "subtitle-1" }, [
+                          _vm._v(
+                            "\n                  Homepage\n                "
+                          )
+                        ])
+                      ])
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
               _c(
                 "v-list-item",
                 { attrs: { link: "" } },
@@ -39652,7 +39684,7 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          _c("v-toolbar-title", [_vm._v("VNXE")]),
+          _c("v-toolbar-title", [_vm._v("\n      VNXE BLOG\n    ")]),
           _vm._v(" "),
           _c("v-spacer"),
           _vm._v(" "),
@@ -39685,7 +39717,10 @@ var render = function() {
               authUser: _vm.authuser,
               config: _vm.config,
               user_posts: _vm.user_posts,
-              user_profile: _vm.user_profile
+              user_profile: _vm.user_profile,
+              users_count: _vm.users_count,
+              categories_count: _vm.categories_count,
+              posts_count: _vm.posts_count
             }
           })
         ],
