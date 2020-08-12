@@ -20,7 +20,7 @@ An open-source Vnxe Blog web application using Laravel and Vue.
 
 ### Preview
 
-- [Watch this Video Demonstration of the Project](https://drive.google.com/file/d/1JWlYPDI9_0Z4Zwd1_ub_Zolrww5KNr4y/view?usp=sharing)
+- [Watch this Video Demonstration of the Project](https://www.youtube.com/watch?v=jrIDlcemUso)
 
 ### Installation
 
