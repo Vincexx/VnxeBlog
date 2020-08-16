@@ -17,6 +17,7 @@ Route::middleware('auth:api')->resource('users', 'api\UsersController');
 
 Route::middleware('auth:api')->resource('account', 'api\AccountController');
 
+Route::resource('users', 'api\UsersController');
 Route::middleware('auth:api')->resource('profile', 'api\ProfileController');
 
 

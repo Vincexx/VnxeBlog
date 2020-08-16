@@ -21,7 +21,7 @@
                       <v-icon
                       color="red"
                           small
-                          @click.stop="showDeleteModal=true, category_id=item.id"
+                          @click.stop="showDeleteModal=true, user_id=item.id"
                       >
                           mdi-delete
                       </v-icon>
@@ -43,14 +43,33 @@
                 Unauthorized action.
             </v-alert>
         </v-container>
+
+        <DeleteUser :showDeleteModal="showDeleteModal" :user_id="user_id" /> 
     </div>
 </template>
 
 <script>
+import DeleteUser from './children/DeleteUser'
     export default {
+        components : {
+            DeleteUser
+        },
         props : ["config", "authUser"],
+        mounted () {
+            this.$on('hide_dialog', () => {
+                this.showDeleteModal = false
+            })
+
+            this.$on('user_deleted', () => {
+                this.showDeleteModal = false
+                this.fetchUsers
+                
+            })
+        },
         data() {
             return {
+                user_id : '',
+                showDeleteModal : false,
                 users : [],
                 headers: [
                     { text: 'Name', value: 'name' },

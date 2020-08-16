@@ -36,6 +36,7 @@
             v-model="post.description"   
             ></v-textarea>
 
+          
             <div v-if="post.image && !previewImage" class="mb-2">
               <v-img :src="'/storage/' + post.image" alt="image" v-if="edit">
               </v-img>
@@ -47,6 +48,7 @@
             </div>
 
             <v-file-input
+             class="mt-2"
               label="Upload Image"
               filled
               prepend-icon="mdi-camera"
@@ -57,8 +59,7 @@
               @change="fileChange"
             ></v-file-input>
 
-
-        
+            
 
         </v-card-text>
 
@@ -92,6 +93,7 @@
     props : ["showAddDialog", "authUser", "edit", "showPost"],
     data () {
         return {
+        
             previewImage : '',
             file : null,
             categories : [],

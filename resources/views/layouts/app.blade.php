@@ -54,7 +54,10 @@
                             <a class="nav-link" href="{{ route('admin-dashboard') }}">Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/logout">Logout</a>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-sm rounded-circle text-white" style="background: #21bcc7;">Logout</button>
+                            </form>
                         </li>
                         
                     @endguest

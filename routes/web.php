@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use App\Post;
 
 /*
@@ -34,11 +35,14 @@ Route::middleware('auth')->get('admin/{any}', function () {
 
 Route::post('logout', function() {
 
-    return auth()->logout();
+    Auth::logout();
+    return redirect('/');
+ 
 
-});
+})->name('logout');
 
 Route::resource('posts', 'PostsController');
+Route::resource('categories', 'CategoriesController');
 
 Route::get('user/posts', function () {
 

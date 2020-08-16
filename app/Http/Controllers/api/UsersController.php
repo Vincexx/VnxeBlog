@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\User;
 
 class UsersController extends Controller
@@ -70,8 +71,9 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -79,8 +81,17 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        Storage::delete($user->profile->image);
+
+        $user->delete();
+        $user->profile->delete();
+        $user->posts->delete();
+
+        return response()->json([
+            'message' => 'User Deleted Successfully!'
+        ]);
     }
+
 }
