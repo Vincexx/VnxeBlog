@@ -16,7 +16,8 @@
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
-    <link rel="stylesheet" href="{{ asset('css/fontawesome.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('css/fontawesome.css') }}"> --}}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/owl.css') }}">
     
@@ -54,9 +55,9 @@
                             <a class="nav-link" href="{{ route('admin-dashboard') }}">Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <form action="{{ route('logout') }}" method="POST">
+                            <form action="{{ route('logout') }}" method="POST" id="myform">
                                 @csrf
-                                <button type="submit" class="btn btn-sm rounded-circle text-white" style="background: #21bcc7;">Logout</button>
+                                <a class="nav-link" onclick="document.getElementById('myform').submit();">Logout</a>
                             </form>
                         </li>
                         
@@ -67,6 +68,7 @@
             </div>
         </nav>
     </header>
+
 
     <div id="app">
 
@@ -80,7 +82,7 @@
 
     <!-- Bootstrap core JavaScript -->
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    {{-- <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script> --}}
 
     <!-- Additional Scripts -->
     <script src="{{ asset('js/custom.js') }}"></script>

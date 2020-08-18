@@ -23,7 +23,7 @@
                     class="mb-5"
                     v-if="profile.image"
                     >
-                    <img :src="'/storage/' + profile.image" alt="alt" class="w-50">
+                    <img :src="profile.image" alt="alt" class="w-50">
                     </v-avatar>
 
                     <div class="display-1">

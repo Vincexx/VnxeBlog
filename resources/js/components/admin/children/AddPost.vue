@@ -38,7 +38,7 @@
 
           
             <div v-if="post.image && !previewImage" class="mb-2">
-              <v-img :src="'/storage/' + post.image" alt="image" v-if="edit">
+              <v-img :src="post.image_path_aws" alt="image" v-if="edit">
               </v-img>
             </div>
 

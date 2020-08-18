@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Post;
+use Illuminate\Http\UploadedFile;
 
 class PostsController extends Controller
 {
@@ -56,10 +57,9 @@ class PostsController extends Controller
             'slug' => '',
             'description' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-
         ]);
 
-        $image = $request->image->store('posts_images');
+        $image = $request->image->store('posts_images', 's3');
 
         $post = Post::create([
             'user_id' => $request->user_id,
@@ -68,6 +68,7 @@ class PostsController extends Controller
             'slug' => Str::slug($request->title),
             'description' => $request->description,
             'image' => $image,
+            'image_path_aws' => Storage::disk('s3')->url($image),
         ]);
 
         return response()->json([
@@ -108,9 +109,9 @@ class PostsController extends Controller
     public function update(Request $request, Post $post)
     {
         if($request->hasFile('image')) {
-            Storage::delete($post->image);
-            $image = $request->image->store('posts_images');
-            $post->image = $image;
+            Storage::disk('s3')->delete($post->image);
+            $image = $request->image->store('posts_images', 's3');
+            $post->image_path_aws = Storage::disk('s3')->url($image);
             $post->save();
         }
 
@@ -134,10 +135,9 @@ class PostsController extends Controller
 
     public function destroy(Post $post)
     {
-        Storage::delete($post->image);
+        Storage::disk('s3')->delete($post->image);
 
         $post->delete();
-
         return response()->json($post);
     }
 

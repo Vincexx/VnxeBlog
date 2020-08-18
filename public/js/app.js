@@ -2510,7 +2510,7 @@ __webpack_require__.r(__webpack_exports__);
       search: '',
       headers: [{
         text: 'Image',
-        value: 'image',
+        value: 'image_path_aws',
         sortable: false
       }, {
         text: 'Title',
@@ -39582,10 +39582,7 @@ var render = function() {
                             _vm.profile.image
                               ? _c("img", {
                                   staticClass: "w-50",
-                                  attrs: {
-                                    src: "/storage/" + _vm.profile.image,
-                                    alt: "alt"
-                                  }
+                                  attrs: { src: _vm.profile.image, alt: "alt" }
                                 })
                               : _vm._e()
                           ]),
@@ -39913,7 +39910,7 @@ var render = function() {
                 },
                 scopedSlots: _vm._u([
                   {
-                    key: "item.image",
+                    key: "item.image_path_aws",
                     fn: function(ref) {
                       var item = ref.item
                       return [
@@ -39923,7 +39920,7 @@ var render = function() {
                             _c("v-img", {
                               staticClass: "m-2",
                               attrs: {
-                                src: "/storage/" + item.image,
+                                src: item.image_path_aws,
                                 alt: "image",
                                 width: "100px",
                                 height: "60px"
@@ -40092,10 +40089,7 @@ var render = function() {
                         [
                           _c("img", {
                             staticClass: "w-50",
-                            attrs: {
-                              src: "/storage/" + _vm.profile.image,
-                              alt: "alt"
-                            }
+                            attrs: { src: _vm.profile.image, alt: "alt" }
                           })
                         ]
                       )
@@ -40575,7 +40569,7 @@ var render = function() {
                           _vm.edit
                             ? _c("v-img", {
                                 attrs: {
-                                  src: "/storage/" + _vm.post.image,
+                                  src: _vm.post.image_path_aws,
                                   alt: "image"
                                 }
                               })
@@ -41020,10 +41014,7 @@ var render = function() {
                       _vm.profile.image && !_vm.url
                         ? _c("img", {
                             staticClass: "w-50",
-                            attrs: {
-                              src: "/storage/" + _vm.profile.image,
-                              alt: "alt"
-                            }
+                            attrs: { src: _vm.profile.image, alt: "alt" }
                           })
                         : _vm._e(),
                       _vm._v(" "),

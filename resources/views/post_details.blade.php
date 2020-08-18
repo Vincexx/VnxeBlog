@@ -19,7 +19,7 @@
                 <div class="col-lg-12">
                   <div class="blog-post">
                     <div class="blog-thumb">
-                      <img src="{{ asset('/storage/' . $post->image) }}" alt="">
+                      <img src="{{ $post->image_path_aws }}" alt="">
                     </div>
                     <div class="down-content">
                       <span>{{ $post->category->name }}</span>

@@ -72,9 +72,9 @@ class ProfileController extends Controller
     public function update(Request $request, Profile $profile)
     {
         if($request->hasFile('image')) {
-            Storage::delete($profile->image);
-            $image = $request->image->store('profile_images');
-            $profile->image = $image;
+            Storage::disk('s3')->delete($profile->image);
+            $image = $request->image->store('profile_images' , 's3');
+            $profile->image = Storage::disk('s3')->url($image);
             $profile->save();
         }
 

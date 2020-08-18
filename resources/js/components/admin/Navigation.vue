@@ -28,7 +28,7 @@
                   
                   >
                     <img src="/img/blankProfile.jpg" alt="alt" class="w-50" v-if="!profile.image">
-                    <img :src="'/storage/' + profile.image" alt="alt" class="w-50" v-if="profile.image">
+                    <img :src="profile.image" alt="alt" class="w-50" v-if="profile.image">
                   </v-avatar>
 
                   <div class="regular mt-3 mb-5">

@@ -19,9 +19,9 @@
             :items-per-page="5"
           >
 
-              <template v-slot:item.image="{ item }">
+              <template v-slot:item.image_path_aws="{ item }">
                   <div>
-                    <v-img :src="'/storage/' + item.image" alt="image" width="100px" height="60px" class="m-2"></v-img>
+                    <v-img :src="item.image_path_aws" alt="image" width="100px" height="60px" class="m-2"></v-img>
                   </div>
               </template>
             
@@ -113,7 +113,7 @@ import AddPost from "./children/AddPost.vue"
         },
         search: '',
         headers: [
-          { text: 'Image', value: 'image', sortable: false },
+          { text: 'Image', value: 'image_path_aws', sortable: false },
           { text: 'Title', value: 'title' },
           { text: 'Category', value: 'category.name' },
           { text: 'Created At', value: 'created_at' },

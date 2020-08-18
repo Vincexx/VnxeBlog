@@ -17,7 +17,7 @@
         <div class="owl-banner owl-carousel">
            @foreach ($posts as $post)
                <div class="item">
-                <img src="{{ '/storage/' . $post->image }}" alt="">
+                <img src="{{ $post->image_path_aws }}" alt="">
                 <div class="item-content">
                   <div class="main-content">
                     <div class="meta-category">
@@ -51,7 +51,7 @@
                     <div class="col-lg-12">
                       <div class="blog-post">
                         <div class="blog-thumb">
-                          <img src="{{ asset('/storage/' . $recent->image) }}" alt="">
+                          <img src="{{ $recent->image_path_aws }}" alt="">
                         </div>
                         <div class="down-content">
                           <span>{{ $post->category->name }}</span>

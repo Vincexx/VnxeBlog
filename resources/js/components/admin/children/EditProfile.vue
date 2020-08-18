@@ -17,7 +17,7 @@
             >
 
             <img src="/img/blankProfile.jpg" alt="alt" class="w-50" v-show="!profile.image">
-            <img :src="'/storage/' + profile.image" alt="alt" class="w-50" v-if="profile.image && !url">
+            <img :src="profile.image" alt="alt" class="w-50" v-if="profile.image && !url">
 
             <img :src="url" alt="alt" class="w-50" v-if="url">
             
