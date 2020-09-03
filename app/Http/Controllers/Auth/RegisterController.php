@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use App\Profile;
 
 class RegisterController extends Controller
@@ -75,6 +76,25 @@ class RegisterController extends Controller
         ]);
 
 
+    }
+
+    /**
+     * The user has been registered.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function registered(Request $request, $user)
+    {
+        Profile::create([
+            'user_id' => $user->id,
+            'bio' => 'Bio',
+            'work' => 'Work',
+            'place_of_work' => 'Place of Work',
+        ]);
+
+        return redirect(route('admin-dashboard'));
     }
 }
 
