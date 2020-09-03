@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Post;
 use Illuminate\Http\UploadedFile;
 
+
 class PostsController extends Controller
 {
 
